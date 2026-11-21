@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>E-TOKO · Belanja Semua Kebutuhan di Satu Toko</title>
+  <meta name="description" content="Etalase multi-kategori: Jasa, Fashion, Elektronik, Digital & FnB. Belanja langsung tanpa bikin akun, update pesanan via WhatsApp & Email.">
+  <meta name="theme-color" content="#7C3AED">
+  <!-- Tema toko diterapkan SEBELUM halaman digambar (tanpa kedip warna) -->
+  <script>try{var v=JSON.parse(localStorage.getItem('etoko:tema-vars')||'null');if(v){var r=document.documentElement.style;for(var k in v)r.setProperty(k,v[k]);document.querySelector('meta[name=theme-color]').setAttribute('content',v['--primary']);}}catch(e){}</script>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="E-TOKO">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237C3AED'/%3E%3Cstop offset='1' stop-color='%2338BDF8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='9' fill='url(%23g)'/%3E%3Cpath d='M10 12h12l-1 11H11z' fill='none' stroke='white' stroke-width='2.2' stroke-linejoin='round'/%3E%3Cpath d='M13 12a3 3 0 0 1 6 0' fill='none' stroke='white' stroke-width='2.2'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://script.google.com" crossorigin>
+  <link rel="preconnect" href="https://script.googleusercontent.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://drive.google.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="css/style.css?v=1.1.0">
+  <script defer src="js/config.js?v=1.1.0"></script>
+  <script defer src="js/icons.js?v=1.1.0"></script>
+  <script defer src="js/core.js?v=1.1.0"></script>
+  <script defer src="js/shop.js?v=1.1.0"></script>
+</head>
+<body>
+  <a class="skip-link" href="#view">Lewati ke konten</a>
+
+  <!-- ===================== HEADER ETALASE ===================== -->
+  <header class="topbar" id="shopHeader">
+    <div class="container topbar-in">
+      <a href="#/" class="brand" aria-label="Beranda">
+        <span class="brand-mark" data-store-logo><i data-i="shopping-bag"></i></span>
+        <span class="brand-name" data-store-name>E-TOKO</span>
+      </a>
+      <label class="search" for="q">
+        <i data-i="search"></i>
+        <input id="q" type="search" placeholder="Cari produk, kategori, atau brand..." autocomplete="off" aria-label="Cari produk">
+      </label>
+      <nav class="topnav">
+        <button class="toplink install-btn" data-install hidden><i data-i="smartphone"></i><span>Pasang App</span></button>
+        <a href="#/cek" class="toplink" data-nav="cek"><i data-i="receipt"></i><span>Cek Pesanan</span></a>
+        <a href="#" class="iconbtn" id="waBtn" aria-label="Chat toko via WhatsApp" target="_blank" rel="noopener"><i data-i="headset"></i></a>
+        <a href="#/keranjang" class="iconbtn cart-btn" data-nav="keranjang" aria-label="Keranjang belanja">
+          <i data-i="shopping-cart"></i><span class="dot-count" data-cart-count hidden>0</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="config-warning" id="config-warning" hidden>
+    <i data-i="triangle-alert"></i> Konfigurasi belum lengkap — isi <code>GAS_URL</code> di <code>js/config.js</code> dengan URL Web App Apps Script Anda.
+  </div>
+
+  <!-- ===================== KONTEN SPA ===================== -->
+  <main id="view" tabindex="-1">
+    <!-- Skeleton awal agar tampilan pertama instan -->
+    <section class="page boot-skeleton">
+      <div class="container">
+        <div class="sk sk-hero"></div>
+        <div class="sk-row"><div class="sk sk-chip"></div><div class="sk sk-chip"></div><div class="sk sk-chip"></div><div class="sk sk-chip"></div></div>
+        <div class="grid"><div class="sk sk-card"></div><div class="sk sk-card"></div><div class="sk sk-card"></div><div class="sk sk-card"></div></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer" id="shopFooter">
+    <div class="container footer-in">
+      <div class="f-brand">
+        <a href="#/" class="brand"><span class="brand-mark" data-store-logo><i data-i="shopping-bag"></i></span><span class="brand-name" data-store-name>E-TOKO</span></a>
+        <p class="muted" id="footDesc">Platform multi-kategori modern yang menghubungkan UMKM Indonesia dengan pembeli secara aman, cepat, dan tanpa batas.</p>
+      </div>
+      <div>
+        <h4>Kategori Pilihan</h4>
+        <ul id="footCats"></ul>
+      </div>
+      <div>
+        <h4>Bantuan & Layanan</h4>
+        <ul>
+          <li><a href="#/cek">Cek Pesanan</a></li>
+          <li><a href="#" id="footWa" target="_blank" rel="noopener">WhatsApp Support</a></li>
+          <li><a href="#/keranjang">Keranjang Belanja</a></li>
+          <li><a href="#/admin">Area Admin Toko</a></li>
+          <li><a href="#" data-install hidden>Pasang Aplikasi di HP</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Metode Pembayaran</h4>
+        <p class="muted small">Transfer bank & pembayaran otomatis terverifikasi:</p>
+        <div class="pay-pills" id="footPay"></div>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>© <span id="year"></span> <span data-store-name>E-TOKO</span>. Hak cipta dilindungi.</span>
+      <span class="muted" id="footAddr"></span>
+    </div>
+  </footer>
+
+  <!-- Navigasi bawah (HP) -->
+  <nav class="bottom-nav" id="bottomNav" aria-label="Navigasi utama">
+    <a href="#/" data-nav="home"><i data-i="house"></i><span>Beranda</span></a>
+    <a href="#/" data-cat-open><i data-i="layout-grid"></i><span>Kategori</span></a>
+    <a href="#/keranjang" data-nav="keranjang" class="bn-cart"><i data-i="shopping-cart"></i><span class="dot-count" data-cart-count hidden>0</span><span>Keranjang</span></a>
+    <a href="#/cek" data-nav="cek"><i data-i="receipt"></i><span>Pesanan</span></a>
+  </nav>
+  <button class="install-fab" data-install hidden aria-label="Pasang aplikasi"><i data-i="download"></i><span>Pasang App</span></button>
+
+  <a class="fab-wa" id="fabWa" href="#" target="_blank" rel="noopener" aria-label="Chat toko via WhatsApp" hidden><i data-i="message-circle"></i></a>
+
+  <!-- Shell admin diisi admin.js (dimuat malas hanya saat membuka #/admin) -->
+  <div id="adminShell" hidden></div>
+
+  <div id="toast-root" aria-live="polite"></div>
+  <div id="modal-root"></div>
+
+  <noscript><div class="config-warning">Aktifkan JavaScript untuk menggunakan E-TOKO.</div></noscript>
+</body>
+</html>
